@@ -9,8 +9,8 @@ read_input_lines_codes(Stream, Out) :-
 
 read_input_lines_codes(Stream, Out) :- 
     read_input_lines_codes(Stream, Out, []).
-    % read_string(Stream, "\n", "", _, Out
 
 part1(Out) :-
     open("input.txt", read, File),
-    read_input_lines_codes(File, Out).
+    read_input_lines_codes(File, Out),
+    close(File).
