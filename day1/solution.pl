@@ -31,12 +31,14 @@ solve_part2(Integers, Out) :-
     contains(Z, Integers),
     label([Out]).
 
-main :-
+get_puzzle_inputs(Inputs):- 
     open("input.txt", read, File),
     read_input_lines_codes(File, Inputs),
-    close(File),
+    close(File).
+
+main :-
+    get_puzzle_inputs(Inputs),
     maplist(number_string, Integers, Inputs),
-    
     solve_part1(Integers, Solution1), !,
     solve_part2(Integers, Solution2), !,
     writeln(Solution1),
