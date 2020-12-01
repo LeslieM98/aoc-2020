@@ -22,11 +22,9 @@ solve_part1(Inputs, Out) :-
     contains(Y, Integers),
     label([Out]).
 
-
-
 main :-
     open("input.txt", read, File),
     read_input_lines_codes(File, Inputs),
     close(File),
-    solve_part1(Inputs, Solution1),
+    solve_part1(Inputs, Solution1), !,
     writeln(Solution1).
