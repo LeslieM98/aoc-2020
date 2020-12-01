@@ -5,7 +5,7 @@ read_input_lines_codes(Stream, Out) :-
     Line \= end_of_file,
     Line \= "",
     read_input_lines_codes(Stream, OutR),
-    Out = [Line | OutR].
+    Out = [Line | OutR], !.
 
 read_input_lines_codes(Stream, Out) :- 
     read_input_lines_codes(Stream, Out, []).
