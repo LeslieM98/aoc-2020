@@ -11,6 +11,12 @@ read_input_lines_codes(Stream, Out) :-
 read_input_lines_codes(Stream, Out) :- 
     read_input_lines_codes(Stream, Out, []).
 
+get_puzzle_inputs(Inputs) :- get_puzzle_inputs("input.txt", Inputs).
+get_puzzle_inputs(Filepath, Inputs):- 
+    open(Filepath, read, File),
+    read_input_lines_codes(File, Inputs),
+    close(File).
+
 % ACTUAL PUZZLE
 
 contains(E, [E|_]).
@@ -30,11 +36,6 @@ solve_part2(Integers, Out) :-
     contains(Y, Integers),
     contains(Z, Integers),
     label([Out]).
-
-get_puzzle_inputs(Inputs):- 
-    open("input.txt", read, File),
-    read_input_lines_codes(File, Inputs),
-    close(File).
 
 main :-
     get_puzzle_inputs(Inputs),
