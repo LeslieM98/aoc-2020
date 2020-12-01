@@ -16,18 +16,16 @@ read_input_lines_codes(Stream, Out) :-
 contains(E, [E|_]).
 contains(C, [_|Es]) :- contains(C, Es).
 
-solve_part1(Inputs, Out) :- 
+solve_part1(Integers, Out) :- 
     2020 #= X + Y,
     Out #= X * Y,
-    maplist(number_string, Integers, Inputs),
     contains(X, Integers),
     contains(Y, Integers),
     label([Out]).
 
-solve_part2(Inputs, Out) :-
+solve_part2(Integers, Out) :-
     2020 #= X + Y + Z,
     Out #= X * Y * Z,
-    maplist(number_string, Integers, Inputs),
     contains(X, Integers),
     contains(Y, Integers),
     contains(Z, Integers),
@@ -37,7 +35,9 @@ main :-
     open("input.txt", read, File),
     read_input_lines_codes(File, Inputs),
     close(File),
-    solve_part1(Inputs, Solution1), !,
-    solve_part2(Inputs, Solution2), !,
+    maplist(number_string, Integers, Inputs),
+    
+    solve_part1(Integers, Solution1), !,
+    solve_part2(Integers, Solution2), !,
     writeln(Solution1),
     writeln(Solution2).
