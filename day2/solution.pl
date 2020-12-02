@@ -16,4 +16,7 @@ valid_password(Input):-
     Occurances =< Y.
 
 solve_part1:- 
-    valid_password("1-3 a: abcde").
+    get_puzzle_inputs(Inputs),
+    exclude(valid_password, Inputs, Valid_Passwords),
+    length(Valid_Passwords, Count),
+    writeln(Count).
