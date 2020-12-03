@@ -18,7 +18,7 @@ gen_path(Depth, [Line|Inputs], Path) :-
     gen_path(New_Depth, Inputs, Result),
     Path = [Value|Result], !.
 
-solution1(Input, Result) :- 
+solution1(Inputs, Result) :- 
     gen_path(0, Inputs, Path),
     counter(Path, #, Result).
     
