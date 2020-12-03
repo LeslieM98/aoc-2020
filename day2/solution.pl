@@ -43,5 +43,3 @@ main :-
     solve(validate_password_pt2, Inputs, Solution_Pt2),
     write("Part1: "), writeln(Solution_Pt1),
     write("Part2: "), writeln(Solution_Pt2).
-    
-    
