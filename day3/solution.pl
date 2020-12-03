@@ -18,12 +18,11 @@ gen_path(Depth, [Line|Inputs], Path) :-
     gen_path(New_Depth, Inputs, Result),
     Path = [Value|Result], !.
 
-
-
-
-solution1 :- 
-    get_puzzle_inputs(Inputs),
+solution1(Input, Result) :- 
     gen_path(0, Inputs, Path),
-    counter(Path, #, Trees),
-    write("Part1: "), writeln(Trees).
+    counter(Path, #, Result).
     
+main :-
+    get_puzzle_inputs(Inputs),
+    solution1(Inputs, Solution1),
+    write("Part1: "), writeln(Solution1).
