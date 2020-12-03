@@ -14,6 +14,8 @@ remove_n(N, [_|Ins], Out) :-
     remove_n(New_N, Ins, Out).
 
 
+gen_path(Right, Down, Inputs, Path) :- gen_path(Right, Down, 0, Inputs, Path).
+
 gen_path(_Right, _Down, _Depth, [], []).
 gen_path(Right, Down, Depth, [Line|Inputs], Path) :- 
     string_chars(Line, Chars),
@@ -34,11 +36,11 @@ solution1(Inputs, Result) :-
     counter(Path, #, Result).
     
 solution2(Inputs, Result) :-
-    gen_path(1, 1, 0, Inputs, Path1),
-    gen_path(3, 1, 0, Inputs, Path2),
-    gen_path(5, 1, 0, Inputs, Path3),
-    gen_path(7, 1, 0, Inputs, Path4),
-    gen_path(1, 2, 0, Inputs, Path5),
+    gen_path(1, 1, Inputs, Path1),
+    gen_path(3, 1, Inputs, Path2),
+    gen_path(5, 1, Inputs, Path3),
+    gen_path(7, 1, Inputs, Path4),
+    gen_path(1, 2, Inputs, Path5),
     counter(Path1, #, Trees1),
     counter(Path2, #, Trees2),
     counter(Path3, #, Trees3),
