@@ -7,19 +7,19 @@ counter([E|Es], E, Count) :-
     Count is Acc + 1.
 counter([_|Es], E, Count) :- counter(Es, E, Count).
 
-gen_path(_Depth, [], []).
-gen_path(Depth, [Line|Inputs], Path) :- 
+gen_path_d1(_Right, _Depth, [], []).
+gen_path_d1(Right, Depth, [Line|Inputs], Path) :- 
     string_chars(Line, Chars),
     length(Chars, Len),
-    Modulo is (Depth * 3) mod Len,
+    Modulo is (Depth * Right) mod Len,
     nth0(Modulo, Chars, Value),
 
     New_Depth is Depth + 1,
-    gen_path(New_Depth, Inputs, Result),
+    gen_path_d1(Right, New_Depth, Inputs, Result),
     Path = [Value|Result], !.
 
 solution1(Inputs, Result) :- 
-    gen_path(0, Inputs, Path),
+    gen_path_d1(3, 0, Inputs, Path),
     counter(Path, #, Result).
     
 main :-
