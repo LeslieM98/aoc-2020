@@ -26,6 +26,6 @@ valid_password(Input):-
 
 solve_part1:-
     get_puzzle_inputs(Inputs),
-    exclude(valid_password, Inputs, Valid_Passwords),
+    include(valid_password, Inputs, Valid_Passwords),
     length(Valid_Passwords, Count),
     writeln(Count).
