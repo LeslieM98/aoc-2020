@@ -18,14 +18,19 @@ extract_values_from_definition(Definition, Min, Max, Char, Password) :-
     string_chars(Char_Weird, [Char, ':']).
 
 
-valid_password(Input):-
+validate_password_pt1(Input):-
     extract_values_from_definition(Input, X, Y, C, Password),
     counter(Password, C, Occurances),
     Occurances >= X,
     Occurances =< Y.
 
-solve_part1:-
+solve_part1(Inputs, Solution):-
+    include(validate_password_pt1, Inputs, Valid_Passwords),
+    length(Valid_Passwords, Solution).
+
+main :- 
     get_puzzle_inputs(Inputs),
-    include(valid_password, Inputs, Valid_Passwords),
-    length(Valid_Passwords, Count),
-    writeln(Count).
+    solve_part1(Inputs, Solution_Pt1),
+    writeln(Solution_Pt1).
+    
+    
