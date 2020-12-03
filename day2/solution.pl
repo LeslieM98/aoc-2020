@@ -1,11 +1,5 @@
-:- include("../io_util.pl").
 :- use_module(library(pcre)).
-
-counter([], _, 0).
-counter([E|Es], E, Count) :-
-    counter(Es, E, Acc), !,
-    Count is Acc + 1.
-counter([_|Es], E, Count) :- counter(Es, E, Count).
+:- include("../aoc_util.pl").
 
 extract_values_from_definition(Definition, Min, Max, Char, Password) :-
     re_split('-', Definition, Split1),
@@ -20,7 +14,7 @@ extract_values_from_definition(Definition, Min, Max, Char, Password) :-
 
 validate_password_pt1(Input):-
     extract_values_from_definition(Input, X, Y, C, Password),
-    counter(Password, C, Occurances),
+    counter(C, Password, Occurances),
     Occurances >= X,
     Occurances =< Y.
 

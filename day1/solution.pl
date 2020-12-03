@@ -1,9 +1,5 @@
 :- use_module(library(clpfd)).
-:- include("../io_util.pl").
-
-
-contains(E, [E|_]).
-contains(C, [_|Es]) :- contains(C, Es).
+:- include("../aoc_util.pl").
 
 solve_part1(Integers, Out) :- 
     2020 #= X + Y,
