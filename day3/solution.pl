@@ -28,9 +28,13 @@ solution2(Inputs, Result) :-
     maplist(counter(#), Paths, Tree_Counts),
     foldl(mul, Tree_Counts, 1, Result).
     
+
+main(Input, Solution1, Solution2) :-
+    solution1(Input, Solution1),
+    solution2(Input, Solution2).
+
 main :-
-    get_puzzle_inputs(Inputs),
-    solution1(Inputs, Solution1),
+    get_puzzle_inputs(Input),
+    main(Input, Solution1, Solution2),
     write("Part1: "), writeln(Solution1),
-    solution2(Inputs, Solution2),
     write("Part2: "), writeln(Solution2).

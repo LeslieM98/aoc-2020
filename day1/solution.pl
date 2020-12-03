@@ -16,10 +16,13 @@ solve_part2(Integers, Out) :-
     contains(Z, Integers),
     label([Out]).
 
-main :-
-    get_puzzle_inputs(Inputs),
-    maplist(number_string, Integers, Inputs),
+main(Input, Solution1, Solution2) :-
+    maplist(number_string, Integers, Input),
     solve_part1(Integers, Solution1), !,
-    solve_part2(Integers, Solution2), !,
+    solve_part2(Integers, Solution2), !.
+
+main :-
+    get_puzzle_inputs(Input),
+    main(Input, Solution1, Solution2),
     writeln(Solution1),
     writeln(Solution2).

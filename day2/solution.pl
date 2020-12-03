@@ -31,9 +31,12 @@ solve(Validator, Inputs, Solution) :-
     include(Validator, Inputs, Valid_Passwords),
     length(Valid_Passwords, Solution).
 
+main(Input, Solution1, Solution2) :-
+    solve(validate_password_pt1, Input, Solution1),
+    solve(validate_password_pt2, Input, Solution2).
+
 main :- 
-    get_puzzle_inputs(Inputs),
-    solve(validate_password_pt1, Inputs, Solution_Pt1),
-    solve(validate_password_pt2, Inputs, Solution_Pt2),
-    write("Part1: "), writeln(Solution_Pt1),
-    write("Part2: "), writeln(Solution_Pt2).
+    get_puzzle_inputs(Input),
+    main(Input, Solution1, Solution2),
+    write("Part1: "), writeln(Solution1),
+    write("Part2: "), writeln(Solution2).
