@@ -24,13 +24,29 @@ validate_password_pt1(Input):-
     Occurances >= X,
     Occurances =< Y.
 
+validate_password_pt2(Input):-
+    extract_values_from_definition(Input, X, Y, C, Password),
+    nth1(X, Password, C),
+    \+ nth1(Y, Password, C).
+validate_password_pt2(Input):-
+    extract_values_from_definition(Input, X, Y, C, Password),
+    \+ nth1(X, Password, C),
+    nth1(Y, Password, C).
+
 solve_part1(Inputs, Solution):-
     include(validate_password_pt1, Inputs, Valid_Passwords),
     length(Valid_Passwords, Solution).
 
+solve_part2(Inputs, Solution) :-
+    include(validate_password_pt2, Inputs, Valid_Passwords),
+    length(Valid_Passwords, Solution).
+
+
 main :- 
     get_puzzle_inputs(Inputs),
     solve_part1(Inputs, Solution_Pt1),
-    writeln(Solution_Pt1).
+    solve_part2(Inputs, Solution_Pt2),
+    writeln(Solution_Pt1),
+    writeln(Solution_Pt2).
     
     
