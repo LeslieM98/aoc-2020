@@ -33,20 +33,15 @@ validate_password_pt2(Input):-
     \+ nth1(X, Password, C),
     nth1(Y, Password, C).
 
-solve_part1(Inputs, Solution):-
-    include(validate_password_pt1, Inputs, Valid_Passwords),
+solve(Validator, Inputs, Solution) :-
+    include(Validator, Inputs, Valid_Passwords),
     length(Valid_Passwords, Solution).
-
-solve_part2(Inputs, Solution) :-
-    include(validate_password_pt2, Inputs, Valid_Passwords),
-    length(Valid_Passwords, Solution).
-
 
 main :- 
     get_puzzle_inputs(Inputs),
-    solve_part1(Inputs, Solution_Pt1),
-    solve_part2(Inputs, Solution_Pt2),
-    writeln(Solution_Pt1),
-    writeln(Solution_Pt2).
+    solve(validate_password_pt1, Inputs, Solution_Pt1),
+    solve(validate_password_pt2, Inputs, Solution_Pt2),
+    write("Part1: "), writeln(Solution_Pt1),
+    write("Part2: "), writeln(Solution_Pt2).
     
     
