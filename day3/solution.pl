@@ -18,11 +18,39 @@ gen_path_d1(Right, Depth, [Line|Inputs], Path) :-
     gen_path_d1(Right, New_Depth, Inputs, Result),
     Path = [Value|Result], !.
 
+gen_path_d2(_Right, _Depth, [], []).
+gen_path_d2(_Right, _Depth, [_Ignored], []).
+gen_path_d2(Right, Depth, [Line, _Skipped|Inputs], Path) :- 
+    string_chars(Line, Chars),
+    length(Chars, Len),
+    Modulo is (Depth * Right) mod Len,
+    nth0(Modulo, Chars, Value),
+
+    New_Depth is Depth + 1,
+    gen_path_d2(Right, New_Depth, Inputs, Result),
+    Path = [Value|Result], !.
+
 solution1(Inputs, Result) :- 
     gen_path_d1(3, 0, Inputs, Path),
     counter(Path, #, Result).
     
+solution2(Inputs, Result) :-
+    gen_path_d1(1, 0, Inputs, Path1),
+    gen_path_d1(3, 0, Inputs, Path2),
+    gen_path_d1(5, 0, Inputs, Path3),
+    gen_path_d1(7, 0, Inputs, Path4),
+    gen_path_d2(1, 0, Inputs, Path5),
+    counter(Path1, #, Trees1),
+    counter(Path2, #, Trees2),
+    counter(Path3, #, Trees3),
+    counter(Path4, #, Trees4),
+    counter(Path5, #, Trees5),
+    Result is Trees1 * Trees2 * Trees3 * Trees4 * Trees5.
+
+    
 main :-
-    get_puzzle_inputs(Inputs),
+    get_puzzle_inputs("sample.txt", Inputs),
     solution1(Inputs, Solution1),
-    write("Part1: "), writeln(Solution1).
+    solution2(Inputs, Solution2),
+    write("Part1: "), writeln(Solution1),
+    write("Part2: "), writeln(Solution2).
