@@ -1,5 +1,9 @@
+:- module(day1,[main/3, main/0]).
+
+
 :- use_module(library(clpfd)).
 :- include("../aoc_util.pl").
+:- include("../input_loader.pl").
 
 solve_part1(Integers, Out) :- 
     2020 #= X + Y,
@@ -10,7 +14,7 @@ solve_part1(Integers, Out) :-
 
 solve_part2(Integers, Out) :-
     2020 #= X + Y + Z,
-    Out #= X * Y * Z,
+    Out #=  X * Y * Z,
     contains(X, Integers),
     contains(Y, Integers),
     contains(Z, Integers),

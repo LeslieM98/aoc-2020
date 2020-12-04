@@ -1,5 +1,3 @@
-:- consult(input_loader).
-
 counter(_, [], 0).
 counter(E, [E|Es],  Count) :-
     counter(E, Es, Acc), !,

@@ -1,3 +1,5 @@
+:- module(day3,[main/3, main/0]).
+:- include("../input_loader.pl").
 :- include("../aoc_util.pl").
 :- use_module(library(clpfd)).
 
