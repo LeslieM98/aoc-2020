@@ -1,3 +1,5 @@
+:- module(aoc_util, [counter/3, remove_n/3, mul/3, contains/2]).
+
 counter(_, [], 0).
 counter(E, [E|Es],  Count) :-
     counter(E, Es, Acc), !,

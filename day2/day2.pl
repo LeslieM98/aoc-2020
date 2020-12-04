@@ -1,6 +1,6 @@
 :- module(day2,[main/3, main/0]).
 :- include("../input_loader.pl").
-:- include("../aoc_util.pl").
+:- use_module("../aoc_util").
 :- use_module(library(pcre)).
 
 extract_values_from_definition(Definition, Min, Max, Char, Password) :-

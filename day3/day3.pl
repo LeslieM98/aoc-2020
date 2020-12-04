@@ -1,6 +1,6 @@
 :- module(day3,[main/3, main/0]).
 :- include("../input_loader.pl").
-:- include("../aoc_util.pl").
+:- use_module("../aoc_util").
 :- use_module(library(clpfd)).
 
 gen_path(Inputs, Slope, Path) :- gen_path(Slope, 0, Inputs, Path).

@@ -2,7 +2,7 @@
 
 
 :- use_module(library(clpfd)).
-:- include("../aoc_util.pl").
+:- use_module("../aoc_util").
 :- include("../input_loader.pl").
 
 solve_part1(Integers, Out) :- 
