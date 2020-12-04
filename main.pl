@@ -1,8 +1,4 @@
 :- use_module("input_loader", [get_puzzle_inputs/2]).
-:- use_module("day01/day01", [main/3 as day01]).
-:- use_module("day02/day02", [main/3 as day02]).
-:- use_module("day03/day03", [main/3 as day03]).
-:- use_module("day04/day04", [main/3 as day04]).
 
 daynr_string(Day_Nr, Str) :- 
     Day_Nr > 9,
@@ -23,13 +19,31 @@ day_path(Day, Path) :-
     string_concat("day", Day_Str, Dir),
     string_concat(Dir, "/input.txt", Path).
 
+day_module(Day, Module) :- 
+    day_predicate(Day, Day_Str),
+    string_concat(Day_Str, "/", Left),
+    string_concat(Left, Day_Str, Module).
+
+load_module(Day) :-
+    day_module(Day, Module),
+    day_predicate(Day, Predicate),
+    string_concat("[main/3 as ", Predicate, Left),
+    string_concat(Left, "]", Import_Str),
+    string_to_atom(Import_Str, Import_Atom),
+    atom_to_term(Import_Atom, Import, []),
+    call(use_module, Module, Import).
+
+    
+
 execute_puzzle(Day, Expected_Part1, Expected_Part2) :-
+    load_module(Day),
+
     day_path(Day, Path),
     get_puzzle_inputs(Path, D1_Input),
     day_predicate(Day, Predicate),
-    statistics(walltime, [TimeSinceStart | [TimeSinceLastCall]]),
+    statistics(walltime, [_ | [_]]),
     call(Predicate, D1_Input, D1P1, D1P2),
-    statistics(walltime, [NewTimeSinceStart | [ExecutionTime]]),
+    statistics(walltime, [_ | [ExecutionTime]]),
     write(Predicate), writeln(":"),
     write("part1 expected: "), writeln(Expected_Part1), 
     write("part1 actual:   "), writeln(D1P1),
