@@ -3,7 +3,7 @@
 
 :- use_module(library(clpfd)).
 :- use_module("../aoc_util").
-:- include("../input_loader.pl").
+:- use_module("../input_loader",[get_puzzle_inputs/2]).
 
 solve_part1(Integers, Out) :- 
     2020 #= X + Y,

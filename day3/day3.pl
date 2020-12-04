@@ -1,5 +1,5 @@
 :- module(day3,[main/3, main/0]).
-:- include("../input_loader.pl").
+:- use_module("../input_loader",[get_puzzle_inputs/2]).
 :- use_module("../aoc_util").
 :- use_module(library(clpfd)).
 

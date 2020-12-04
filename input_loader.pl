@@ -1,3 +1,5 @@
+:- module(input_loader,[get_puzzle_inputs/2]).
+
 read_input_lines_codes(_, Acc, Acc).
 read_input_lines_codes(Stream, Out) :- 
     read_line_to_string(Stream, Line),

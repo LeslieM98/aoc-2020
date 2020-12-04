@@ -1,4 +1,4 @@
-:- include("input_loader.pl").
+:- use_module("input_loader", [get_puzzle_inputs/2]).
 :- use_module("day1/day1", [main/3 as day1]).
 :- use_module("day2/day2", [main/3 as day2]).
 :- use_module("day3/day3", [main/3 as day3]).
