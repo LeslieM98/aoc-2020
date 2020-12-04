@@ -27,12 +27,15 @@ execute_puzzle(Day, Expected_Part1, Expected_Part2) :-
     day_path(Day, Path),
     get_puzzle_inputs(Path, D1_Input),
     day_predicate(Day, Predicate),
+    statistics(walltime, [TimeSinceStart | [TimeSinceLastCall]]),
     call(Predicate, D1_Input, D1P1, D1P2),
+    statistics(walltime, [NewTimeSinceStart | [ExecutionTime]]),
     write(Predicate), writeln(":"),
     write("part1 expected: "), writeln(Expected_Part1), 
     write("part1 actual:   "), writeln(D1P1),
     write("part2 expected: "), writeln(Expected_Part2), 
-    write("part2 actual:   "), writeln(D1P2), nl.
+    write("part2 actual:   "), writeln(D1P2), 
+    write('Execution took '), write(ExecutionTime), writeln(' ms.'), nl.
 
 main :-
     execute_puzzle(1, "898299", "143933922"),
