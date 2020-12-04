@@ -22,16 +22,18 @@ day_path(Day, Path) :-
     string_concat("day", Day_Str, Dir),
     string_concat(Dir, "/input.txt", Path).
 
-execute_puzzle(Day) :-
+execute_puzzle(Day, Expected_Part1, Expected_Part2) :-
     day_path(Day, Path),
     get_puzzle_inputs(Path, D1_Input),
     day_predicate(Day, Predicate),
     call(Predicate, D1_Input, D1P1, D1P2),
-    % day01(D1_Input, D1P1, D1P2),
-    writeln(D1P1),
-    writeln(D1P2).
+    write(Predicate), writeln(":"),
+    write("part1 expected: "), writeln(Expected_Part1), 
+    write("part1 actual:   "), writeln(D1P1),
+    write("part2 expected: "), writeln(Expected_Part2), 
+    write("part2 actual:   "), writeln(D1P2), nl.
 
 main :-
-    execute_puzzle(1),
-    execute_puzzle(2),
-    execute_puzzle(3).
+    execute_puzzle(1, "898299", "143933922"),
+    execute_puzzle(2, "447", "249"),
+    execute_puzzle(3, "223", "3517401300").
