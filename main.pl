@@ -2,6 +2,7 @@
 :- use_module("day01/day01", [main/3 as day01]).
 :- use_module("day02/day02", [main/3 as day02]).
 :- use_module("day03/day03", [main/3 as day03]).
+:- use_module("day04/day04", [main/3 as day04]).
 
 daynr_string(Day_Nr, Str) :- 
     Day_Nr > 9,
@@ -36,4 +37,5 @@ execute_puzzle(Day, Expected_Part1, Expected_Part2) :-
 main :-
     execute_puzzle(1, "898299", "143933922"),
     execute_puzzle(2, "447", "249"),
-    execute_puzzle(3, "223", "3517401300").
+    execute_puzzle(3, "223", "3517401300"),
+    execute_puzzle(4, "228", "175").
