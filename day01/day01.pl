@@ -1,4 +1,4 @@
-:- module(day1,[main/3, main/0]).
+:- module(day01,[main/3, main/0]).
 
 
 :- use_module(library(clpfd)).
