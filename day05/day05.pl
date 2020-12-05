@@ -60,8 +60,7 @@ step_rows(Splits, Result) :-
 calculate_seat_id([Row, Col], ID) :-
     ID is Row * 8 + Col.
 
-
-solution1(Input, Solution) :-
+input_to_ids(Input, IDs) :-
     maplist(get_row, Input, Ticket_Row_Steps),
     maplist(step_rows, Ticket_Row_Steps, Ticket_Rows),
 
@@ -70,8 +69,13 @@ solution1(Input, Solution) :-
 
     zip(Ticket_Rows, Ticket_Cols, Ticket_Rows_Cols),
 
-    maplist(calculate_seat_id, Ticket_Rows_Cols, Ticked_Seat_IDs), !,
-    max_list(Ticked_Seat_IDs, Solution).
+    maplist(calculate_seat_id, Ticket_Rows_Cols, IDs), !.
+
+
+
+solution1(Input, Solution) :-
+    input_to_ids(Input, IDs),
+    max_list(IDs, Solution).
 
     
 
