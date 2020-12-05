@@ -72,15 +72,25 @@ input_to_ids(Input, IDs) :-
     maplist(calculate_seat_id, Ticket_Rows_Cols, IDs), !.
 
 
+find_my_id([Dumb_Passenger, Other_Dumb_Passenger|_], Mine) :-
+    Dumb_Passenger_Plus_2 is Dumb_Passenger + 2,
+    Other_Dumb_Passenger = Dumb_Passenger_Plus_2,
+    Mine is Dumb_Passenger + 1, !.
+
+
+find_my_id([Dumb_Passenger, Other_Dumb_Passenger|IDs], Mine) :-
+    find_my_id([Other_Dumb_Passenger|IDs], Mine).
+
+
 
 solution1(Input, Solution) :-
     input_to_ids(Input, IDs),
     max_list(IDs, Solution).
 
-    
-
 solution2(Input, Solution) :-
-    Solution = "NOT DONE".
+    input_to_ids(Input, IDs),
+    sort(IDs, Sorted_IDs),
+    find_my_id(Sorted_IDs, Solution).
 
 
 main(Input, Solution1, Solution2) :-
