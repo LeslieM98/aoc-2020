@@ -1,4 +1,10 @@
-:- module(aoc_util, [counter/3, remove_n/3, mul/3, contains/2]).
+:- module(aoc_util,[concat_inputs/2,equiv/2,counter/3,remove_n/3,mul/3,contains/2]).
+
+equiv(V1, V2) :- V1 = V2.
+
+concat_inputs(Inputs, Concat) :-
+    atomic_list_concat(Inputs, Tmp),
+    atom_string(Tmp, Concat).
 
 counter(_, [], 0).
 counter(E, [E|Es],  Count) :-

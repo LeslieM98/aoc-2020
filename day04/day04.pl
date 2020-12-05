@@ -3,11 +3,6 @@
 :- use_module("../aoc_util").
 :- use_module(library(pcre)).
 % :- use_module(library(clpfd)).
-equiv(V1, V2) :- V1 = V2.
-
-concat_inputs(Inputs, Concat) :-
-    atomic_list_concat(Inputs, Tmp),
-    atom_string(Tmp, Concat).
 
 empty_to_nl(X, Y) :-
     X = "",
