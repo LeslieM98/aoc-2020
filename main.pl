@@ -1,4 +1,5 @@
 :- use_module("input_loader", [get_puzzle_inputs/2]).
+
 daynr_string(Day_Nr, Str) :- 
     Day_Nr > 9,
     number_string(Day_Nr, Str), !.
@@ -32,8 +33,6 @@ load_module(Day) :-
     atom_to_term(Import_Atom, Import, []),
     call(use_module, Module, Import).
 
-    
-
 execute_puzzle(Day, Expected_Part1, Expected_Part2) :-
     load_module(Day),
 
@@ -55,6 +54,7 @@ main :-
     execute_puzzle(2, "447", "249"),
     execute_puzzle(3, "223", "3517401300"),
     execute_puzzle(4, "228", "175"),
+    execute_puzzle(5, "832", "517"),
 
     halt.
 :- main.

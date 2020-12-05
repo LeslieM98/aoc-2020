@@ -1,30 +1,6 @@
 :- module(day05,[main/3, main/0]).
 :- use_module("../input_loader",[get_puzzle_inputs/1, get_puzzle_inputs/2]).
 :- use_module("../aoc_util").
-:- use_module(library(clpfd)).
-
-
-
-
-
-zip([], [], []).
-zip([E1|L1], [E2|L2], Result) :- 
-    zip(L1, L2, Acc),
-    Result = [[E1, E2]|Acc].
-
-interval_to(To, Result) :- interval_from_to(0, To, Result).
-
-interval_from_to(To, To, []) :- !.
-interval_from_to(From, To, Result) :-
-    From_New is From + 1,
-    interval_from_to(From_New, To, Acc),
-    Result = [From|Acc].
-
-list_half_half(List, Lower, Upper) :-
-    length(List, N),
-    H is N - N // 2,
-    length(Lower, H),
-    append(Lower, Upper, List).
 
 
 split_row_col(Input, Row_Splits, Col_Splits) :-
@@ -76,11 +52,8 @@ find_my_id([Dumb_Passenger, Other_Dumb_Passenger|_], Mine) :-
     Dumb_Passenger_Plus_2 is Dumb_Passenger + 2,
     Other_Dumb_Passenger = Dumb_Passenger_Plus_2,
     Mine is Dumb_Passenger + 1, !.
-
-
-find_my_id([Dumb_Passenger, Other_Dumb_Passenger|IDs], Mine) :-
+find_my_id([_, Other_Dumb_Passenger|IDs], Mine) :-
     find_my_id([Other_Dumb_Passenger|IDs], Mine).
-
 
 
 solution1(Input, Solution) :-
@@ -98,7 +71,7 @@ main(Input, Solution1, Solution2) :-
     solution2(Input, Solution2).
 
 main :-
-    get_puzzle_inputs("day05/input.txt", Input),
+    get_puzzle_inputs("input.txt", Input),
     main(Input, Solution1, Solution2),
     write("Part1: "), writeln(Solution1),
     write("Part2: "), writeln(Solution2).
