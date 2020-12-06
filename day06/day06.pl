@@ -29,6 +29,11 @@ group_unique_answers(Group, Unique_Answers) :-
     is_list(Flat),
     list_to_set(Flat, Unique_Answers).
 
+group_collective_all_true_questions(Group, Result) :-
+    maplist(person_isolate_answers, Group, Isolated_Answers),
+    flatten(Isolated_Answers, All_Answers),
+    list_to_set(All_Answers, All_Answered_Questions),
+    foldl(intersection,Isolated_Answers, All_Answered_Questions, Result).
 
 solution1(Input, Solution) :-
     group_answers(Input, Groups),
@@ -37,8 +42,11 @@ solution1(Input, Solution) :-
     sum_list(Lengths, Solution).
 
 
-solution2(_Input, Solution) :-
-    Solution = "NOT DONE YET".
+solution2(Input, Solution) :-
+    group_answers(Input, Groups),
+    maplist(group_collective_all_true_questions, Groups, Unique_Answers),
+    maplist(length, Unique_Answers, Lengths),
+    sum_list(Lengths, Solution).
 
 
 main(Input, Solution1, Solution2) :-
