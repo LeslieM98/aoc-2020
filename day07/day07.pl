@@ -77,7 +77,7 @@ solution2(Input, Solution) :-
 
 
 main(Input, Solution1, Solution2) :-
-    % solution1(Input, Solution1),
+    solution1(Input, Solution1),
     solution2(Input, Solution2).
 
 main :-
