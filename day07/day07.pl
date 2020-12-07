@@ -2,6 +2,7 @@
 :- use_module("../input_loader",[get_puzzle_inputs/1, get_puzzle_inputs/2]).
 :- use_module("../aoc_util").
 :- use_module(library(pcre)).
+:- use_module(library(clpfd)).
 
 extract_colours_bagcount_bagstrings([], []).
 extract_colours_bagcount_bagstrings([Bagstring| Bagstrings], Extracted) :-
@@ -39,17 +40,22 @@ can_contain_gold(Parsed_Input, [[Colour, _]|List_Of_Contained]) :-
 
 get_contained_from_node([_, Contained], Contained).
 
-    
-    
-    
-    
 
-    
+depth_count(_, [], 0) :- !.
+depth_count(Parsed_Input, [[Colour, Count]|BFS_Queue], Result) :-
+    Result #= Count * (DFS_Count + 1) + BFS_Result, % -1 because bag does not contain itself
+    get_container_contained(Parsed_Input, Colour, DFS_Queue),
+    depth_count(Parsed_Input, DFS_Queue, DFS_Count),
+    depth_count(Parsed_Input, BFS_Queue, BFS_Result),
+    label([Result]).
+
+count_contained_bags(Parsed_Input, Colour, Result) :- 
+    Result #= Acc - 1, % bag does not contain itself
+    depth_count(Parsed_Input, [[Colour, 1]], Acc),
+    label([Result]).
 
 parse_data(Input, Parsed_Tree) :-
     maplist(parse_line, Input, Parsed_Tree).
-
-    
 
 solution1(Input, Solution) :-
     parse_data(Input, Parsed),
@@ -65,12 +71,13 @@ test :-
     can_contain_gold(Parsed, [["bright white",1]]),
     can_contain_gold(Parsed, [["muted yellow",1]]).
 
-solution2(_Input, Solution) :-
-    Solution = "NOT DONE YET".
+solution2(Input, Solution) :-
+    parse_data(Input, Parsed),
+    count_contained_bags(Parsed, "shiny gold", Solution).
 
 
 main(Input, Solution1, Solution2) :-
-    solution1(Input, Solution1),
+    % solution1(Input, Solution1),
     solution2(Input, Solution2).
 
 main :-
