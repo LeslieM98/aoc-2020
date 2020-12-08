@@ -56,7 +56,7 @@ main :-
     execute_puzzle(4, "228", "175"),
     execute_puzzle(5, "832", "517"),
     execute_puzzle(6, "6596", "3219"),
-    execute_puzzle(7, "TBA", "TBA"),
+    execute_puzzle(7, "144", "5956"),
 
     halt.
 :- main.
